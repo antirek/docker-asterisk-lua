@@ -483,19 +483,31 @@ RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libreadline-dev \
 
 WORKDIR /tmp
 
-RUN git clone https://github.com/algernon/libmongo-client.git
+#RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
 
-WORKDIR /tmp/libmongo-client
+#WORKDIR /tmp/mongo-cxx-driver
 
-RUN autoreconf -i && ./configure && make && make install
+#RUN git checkout 26compat
 
-WORKDIR /tmp
-
-RUN git clone https://github.com/moai/luamongo.git
-
-WORKDIR /tmp/luamongo
-
-RUN make Linux LUAPKG=lua5.2
+RUN apt-get install -y mongodb-clients 
 
 
+RUN curl -sf -o mongodriver.tar.gz -L http://downloads.mongodb.org/cxx-driver/mongodb-linux-x86_64-v2.0-latest.tgz
+
+
+RUN mkdir /tmp/mongodriver
+
+RUN tar -zxf mongodriver.tar.gz -C /tmp/mongodriver --strip-components=1
+
+WORKDIR /tmp/mongodriver
+
+RUN scons --prefix=\lib install
+
+#RUN lua -v
+
+#RUN luarocks install https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec
+
+#  - wget https://github.com/moai/luamongo/archive/v0.4.3.tar.gz
+#  - tar zxvf v0.4.3.tar.gz
+#  - cd luamongo-0.4.3 && make && sudo mkdir -p /usr/lib/lua/5.2 && sudo cp mongo.so /usr/lib/lua/5.2 && cd -
 
