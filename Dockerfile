@@ -1,5 +1,4 @@
-FROM ubuntu:14.04
-
+FROM ubuntu:14.04.3
 
 ## Lua 
 
@@ -9,8 +8,11 @@ ENV LUA_MINOR_VERSION 4
 ENV LUA_VERSION ${LUA_MAJOR_VERSION}.${LUA_MINOR_VERSION}
 
 RUN apt-get update && \
-    apt-get install -y build-essential zip unzip libreadline-dev && \
-    apt-get clean
+    apt-get install -y build-essential 
+
+RUN apt-get install -y zip unzip libreadline-dev
+    
+RUN apt-get clean
 
 RUN apt-get install -y curl
 
@@ -451,7 +453,7 @@ RUN make
 
 RUN make install
 
-RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
+#RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
 
 
 ## LuaRocks and deps
@@ -471,15 +473,18 @@ RUN make bootstrap
 RUN luarocks install luasocket
 
 
-
 ## Lua Mongo driver
 
 RUN apt-get install -y git mc
 
-RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libreadline-dev \
+RUN apt-get check && apt-get update && apt-get clean
+
+
+RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
     libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
     libboost-date-time-dev gcc g++ git lua5.2-dev make libmongo-client-dev \
     dh-autoreconf
+
 
 WORKDIR /tmp
 
@@ -487,27 +492,8 @@ RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
 
 WORKDIR /tmp/mongo-cxx-driver
 
-RUN git checkout 26compat
 
-RUN scons --use-system-boost --prefix /usr/local --full install-mongoclient
+RUN git checkout legacy
 
-#RUN lua -v
-
-#RUN luarocks install https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec
-
-WORKDIR /tmp
-
-#RUN luarocks install "https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec"
-
-RUN curl -sf -o luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.3.tar.gz
-
-RUN mkdir /tmp/luamongo
-
-RUN tar -zxf luamongo.tar.gz -C /tmp/luamongo --strip-components=1
-
-WORKDIR /tmp/luamongo
-
-RUN make 
-
-#&& sudo mkdir -p /usr/lib/lua/5.2 && sudo cp mongo.so /usr/lib/lua/5.2 && cd -
+RUN scons --prefix=/usr/lib install
 
