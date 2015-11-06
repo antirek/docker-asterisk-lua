@@ -1,5 +1,8 @@
 FROM ubuntu:14.04
 
+
+## Lua 
+
 ENV LUA_HASH 913fdb32207046b273fdb17aad70be13
 ENV LUA_MAJOR_VERSION 5.2
 ENV LUA_MINOR_VERSION 4
@@ -21,11 +24,8 @@ RUN mkdir /usr/bin/lua && \
     make linux test && make install && \
     cd .. && rm -rf *.tar.gz *.md5 lua-${LUA_VERSION}
 
-#CMD ["/usr/local/bin/lua"]
 
-# RUN apt-get install -y mercurial linux-headers-`uname -r`
-
-# RUN apt-get install -y linux-headers libxml2 sqlite openssl  xinetd tar
+## Asterisk
 
 RUN curl -sf -o /tmp/asterisk.tar.gz -L http://downloads.asterisk.org/pub/telephony/certified-asterisk/certified-asterisk-11.6-current.tar.gz
 
@@ -447,12 +447,55 @@ RUN menuselect/menuselect \
     --disable test_amihooks \
     menuselect.makeopts
 
-# RUN make menuselect.makeopts
-
-# RUN sed -i "s/BUILD_NATIVE//" menuselect.makeopts
-
-# Continue with a standard make.
 RUN make
 
 RUN make install
+
+RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
+
+
+## LuaRocks and deps
+
+RUN mkdir /tmp/luarocks
+
+RUN curl -sf -o /tmp/luarocks.tar.gz -L http://luarocks.org/releases/luarocks-2.2.1.tar.gz
+
+RUN tar -zxf /tmp/luarocks.tar.gz -C /tmp/luarocks --strip-components=1
+
+WORKDIR /tmp/luarocks
+
+RUN ./configure;
+
+RUN make bootstrap
+
+RUN luarocks install luasocket
+
+
+
+## Lua Mongo driver
+
+RUN apt-get install -y git mc
+
+RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libreadline-dev \
+    libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
+    libboost-date-time-dev gcc g++ git lua5.2-dev make libmongo-client-dev \
+    dh-autoreconf
+
+WORKDIR /tmp
+
+RUN git clone https://github.com/algernon/libmongo-client.git
+
+WORKDIR /tmp/libmongo-client
+
+RUN autoreconf -i && ./configure && make && make install
+
+WORKDIR /tmp
+
+RUN git clone https://github.com/moai/luamongo.git
+
+WORKDIR /tmp/luamongo
+
+RUN make Linux LUAPKG=lua5.2
+
+
 
