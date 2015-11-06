@@ -489,13 +489,25 @@ WORKDIR /tmp/mongo-cxx-driver
 
 RUN git checkout 26compat
 
-RUN scons --use-system-boost
+RUN scons --use-system-boost --prefix /usr/local --full install-mongoclient
 
 #RUN lua -v
 
 #RUN luarocks install https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec
 
-#  - wget https://github.com/moai/luamongo/archive/v0.4.3.tar.gz
-#  - tar zxvf v0.4.3.tar.gz
-#  - cd luamongo-0.4.3 && make && sudo mkdir -p /usr/lib/lua/5.2 && sudo cp mongo.so /usr/lib/lua/5.2 && cd -
+WORKDIR /tmp
+
+#RUN luarocks install "https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec"
+
+RUN curl -sf -o luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.3.tar.gz
+
+RUN mkdir /tmp/luamongo
+
+RUN tar -zxf luamongo.tar.gz -C /tmp/luamongo --strip-components=1
+
+WORKDIR /tmp/luamongo
+
+RUN make 
+
+#&& sudo mkdir -p /usr/lib/lua/5.2 && sudo cp mongo.so /usr/lib/lua/5.2 && cd -
 
