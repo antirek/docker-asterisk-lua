@@ -483,25 +483,13 @@ RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libreadline-dev \
 
 WORKDIR /tmp
 
-#RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
+RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
 
-#WORKDIR /tmp/mongo-cxx-driver
+WORKDIR /tmp/mongo-cxx-driver
 
-#RUN git checkout 26compat
+RUN git checkout 26compat
 
-RUN apt-get install -y mongodb-clients 
-
-
-RUN curl -sf -o mongodriver.tar.gz -L http://downloads.mongodb.org/cxx-driver/mongodb-linux-x86_64-v2.0-latest.tgz
-
-
-RUN mkdir /tmp/mongodriver
-
-RUN tar -zxf mongodriver.tar.gz -C /tmp/mongodriver --strip-components=1
-
-WORKDIR /tmp/mongodriver
-
-RUN scons --prefix=\lib install
+RUN scons --use-system-boost
 
 #RUN lua -v
 
