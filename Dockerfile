@@ -493,7 +493,23 @@ RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
 WORKDIR /tmp/mongo-cxx-driver
 
 
-RUN git checkout legacy
+RUN git checkout 26compat
 
-RUN scons --prefix=/usr/lib install
+RUN scons --prefix=/usr --full --use-system-boost install-mongoclient
+
+
+
+WORKDIR /tmp
+
+#RUN luarocks install "https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec"
+
+RUN curl -sf -o luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.4.tar.gz
+
+RUN mkdir /tmp/luamongo
+
+RUN tar -zxf luamongo.tar.gz -C /tmp/luamongo --strip-components=1
+
+WORKDIR /tmp/luamongo
+
+RUN make
 
