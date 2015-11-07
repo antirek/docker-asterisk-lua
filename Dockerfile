@@ -511,3 +511,4 @@ WORKDIR /tmp/luamongo
 
 RUN make
 
+RUN cp mongo.so /usr/local/lib/lua/5.2/mongo.so
