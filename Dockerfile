@@ -453,7 +453,7 @@ RUN make
 
 RUN make install
 
-#RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
+RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
 
 
 ## LuaRocks and deps
@@ -492,11 +492,9 @@ RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
 
 WORKDIR /tmp/mongo-cxx-driver
 
-
 RUN git checkout 26compat
 
 RUN scons --prefix=/usr --full --use-system-boost install-mongoclient
-
 
 
 WORKDIR /tmp

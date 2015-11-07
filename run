@@ -1,4 +1,4 @@
 docker run \
  -v /etc/asterisk:/etc/asterisk \
  --net=host \
- -i -t ubuntu:lua2
+ -i -t ubuntu:lua
