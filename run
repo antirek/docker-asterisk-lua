@@ -1,4 +1,6 @@
 docker run \
  -v /etc/asterisk:/etc/asterisk \
+ -v /tmp/lua-dialplan:/tmp/lua-dialplan \
+ -v /tmp/var/log:/var/log \
  --net=host \
  -i -t ubuntu:lua

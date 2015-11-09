@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.3
+FROM ubuntu:14.04
 
 ## Lua 
 
@@ -512,3 +512,11 @@ WORKDIR /tmp/luamongo
 RUN make
 
 RUN cp mongo.so /usr/local/lib/lua/5.2/mongo.so
+
+RUN cp mongo.so /usr/local/lib/lua/5.1/mongo.so
+
+WORKDIR /tmp
+
+RUN luarocks install inspect 
+
+#RUN ln -s /tmp/lua-dialplan/ /usr/local/lib/lua/5.1/dialplan
