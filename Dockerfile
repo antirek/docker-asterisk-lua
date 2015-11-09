@@ -2,9 +2,9 @@ FROM ubuntu:14.04
 
 ## Lua 
 
-ENV LUA_HASH 913fdb32207046b273fdb17aad70be13
-ENV LUA_MAJOR_VERSION 5.2
-ENV LUA_MINOR_VERSION 4
+ENV LUA_HASH 2e115fe26e435e33b0d5c022e4490567
+ENV LUA_MAJOR_VERSION 5.1
+ENV LUA_MINOR_VERSION 5
 ENV LUA_VERSION ${LUA_MAJOR_VERSION}.${LUA_MINOR_VERSION}
 
 RUN apt-get update && \
@@ -482,7 +482,7 @@ RUN apt-get check && apt-get update && apt-get clean
 
 RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
     libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
-    libboost-date-time-dev gcc g++ git lua5.2-dev make libmongo-client-dev \
+    libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
     dh-autoreconf
 
 
@@ -511,12 +511,12 @@ WORKDIR /tmp/luamongo
 
 RUN make
 
-RUN cp mongo.so /usr/local/lib/lua/5.2/mongo.so
+#RUN cp mongo.so /usr/local/lib/lua/5.2/mongo.so
 
 RUN cp mongo.so /usr/local/lib/lua/5.1/mongo.so
 
 WORKDIR /tmp
 
-RUN luarocks install inspect 
+RUN luarocks install inspect
 
 #RUN ln -s /tmp/lua-dialplan/ /usr/local/lib/lua/5.1/dialplan
