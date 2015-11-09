@@ -14,16 +14,17 @@ RUN apt-get install -y zip unzip libreadline-dev
     
 RUN apt-get clean
 
-RUN apt-get install -y curl
+RUN apt-get install -y curl libncurses-dev
 
 RUN mkdir /usr/bin/lua && \
     cd /usr/bin/lua && \
     echo "${LUA_HASH}  lua-${LUA_VERSION}.tar.gz" > lua-${LUA_VERSION}.md5 && \
     curl -R -O http://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz && \
     md5sum -c lua-${LUA_VERSION}.md5 && \
-    tar zxf lua-${LUA_VERSION}.tar.gz && \
-    cd lua-${LUA_VERSION} && \
-    make linux test && make install && \
+    tar -zxf lua-${LUA_VERSION}.tar.gz
+
+RUN cd /usr/bin/lua/lua-${LUA_VERSION} && \
+    make linux && make linux test && make install && \
     cd .. && rm -rf *.tar.gz *.md5 lua-${LUA_VERSION}
 
 
@@ -483,7 +484,7 @@ RUN apt-get check && apt-get update && apt-get clean
 RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
     libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
     libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-    dh-autoreconf
+    dh-autoreconf lua5.2-dev
 
 
 WORKDIR /tmp
@@ -509,7 +510,7 @@ RUN tar -zxf luamongo.tar.gz -C /tmp/luamongo --strip-components=1
 
 WORKDIR /tmp/luamongo
 
-RUN make
+RUN make Linux LUAPKG=lua5.1
 
 #RUN cp mongo.so /usr/local/lib/lua/5.2/mongo.so
 
