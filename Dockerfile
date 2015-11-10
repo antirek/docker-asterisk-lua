@@ -474,6 +474,7 @@ RUN make bootstrap
 RUN luarocks install luasocket
 
 
+
 ## Lua Mongo driver
 
 RUN apt-get install -y git mc
@@ -495,7 +496,6 @@ RUN git checkout 26compat
 
 RUN scons --prefix=/usr --full --use-system-boost install-mongoclient
 
-
 WORKDIR /tmp
 
 RUN git clone https://github.com/moai/luamongo.git
@@ -508,6 +508,16 @@ RUN cp mongo.so /usr/local/lib/lua/5.1/mongo.so
 
 WORKDIR /tmp
 
+
+## additional
+
 RUN luarocks install inspect
 
-#RUN ln -s /tmp/lua-dialplan/ /usr/local/lib/lua/5.1/dialplan
+
+## after start prepare
+
+ADD after_start.sh /after_start.sh
+
+RUN chmod +x /after_start.sh
+
+CMD ["/after_start.sh"]
