@@ -484,7 +484,7 @@ RUN apt-get check && apt-get update && apt-get clean
 RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
     libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
     libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-    dh-autoreconf lua5.2-dev
+    dh-autoreconf
 
 
 WORKDIR /tmp
@@ -502,11 +502,15 @@ WORKDIR /tmp
 
 #RUN luarocks install "https://raw.githubusercontent.com/moai/luamongo/master/rockspec/luamongo-scm-0.rockspec"
 
-RUN curl -sf -o luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.4.tar.gz
+#RUN curl -sf -o luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.4.tar.gz
 
-RUN mkdir /tmp/luamongo
+#RUN mkdir /tmp/luamongo
 
-RUN tar -zxf luamongo.tar.gz -C /tmp/luamongo --strip-components=1
+#RUN tar -zxf luamongo.tar.gz -C /tmp/luamongo --strip-components=1
+
+#WORKDIR /tmp/luamongo
+
+RUN git clone https://github.com/moai/luamongo.git
 
 WORKDIR /tmp/luamongo
 
@@ -521,3 +525,5 @@ WORKDIR /tmp
 RUN luarocks install inspect
 
 #RUN ln -s /tmp/lua-dialplan/ /usr/local/lib/lua/5.1/dialplan
+
+
