@@ -457,7 +457,7 @@ RUN make install
 RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
 
 
-## LuaRocks and deps
+## Install luarocks
 
 RUN mkdir /tmp/luarocks
 
@@ -471,11 +471,20 @@ RUN ./configure;
 
 RUN make bootstrap
 
+
+## Install additional lua rocks:
+
 RUN luarocks install luasocket
 
+RUN luarocks install inspect 
+
+RUN luarocks install redis-lua 
+
+RUN luarocks install luafilesystem
 
 
-## Lua Mongo driver
+
+## Install lua mongo driver
 
 RUN apt-get install -y git mc
 
@@ -507,17 +516,3 @@ RUN make Linux LUAPKG=lua5.1
 RUN cp mongo.so /usr/local/lib/lua/5.1/mongo.so
 
 WORKDIR /tmp
-
-
-## additional
-
-RUN luarocks install inspect
-
-
-## after start prepare
-
-ADD after_start.sh /after_start.sh
-
-RUN chmod +x /after_start.sh
-
-CMD ["/after_start.sh"]
