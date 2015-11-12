@@ -5,11 +5,7 @@ FROM ubuntu:14.04
 RUN apt-get check && \
     apt-get update && \
     apt-get install -y \ 
-        build-essential \
-        zip unzip \
-        libreadline-dev \
-        curl libncurses-dev \
-        mc aptitude \
+        build-essential zip unzip libreadline-dev curl libncurses-dev mc aptitude \
         tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
         libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
         libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
