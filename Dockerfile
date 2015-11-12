@@ -9,34 +9,12 @@ RUN apt-get check && \
         zip unzip \
         libreadline-dev \
         curl libncurses-dev \
-        mc aptitude
-    
-RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
-    libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
-    libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-    dh-autoreconf
-
-RUN apt-get clean
-
-
-## Lua 
-
-ENV LUA_HASH 2e115fe26e435e33b0d5c022e4490567
-ENV LUA_MAJOR_VERSION 5.1
-ENV LUA_MINOR_VERSION 5
-ENV LUA_VERSION ${LUA_MAJOR_VERSION}.${LUA_MINOR_VERSION}
-
-RUN mkdir /usr/bin/lua && \
-    cd /usr/bin/lua && \
-    echo "${LUA_HASH}  lua-${LUA_VERSION}.tar.gz" > lua-${LUA_VERSION}.md5 && \
-    curl -R -O http://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz && \
-    md5sum -c lua-${LUA_VERSION}.md5 && \
-    tar -zxf lua-${LUA_VERSION}.tar.gz
-
-RUN cd /usr/bin/lua/lua-${LUA_VERSION} && \
-    make linux && make linux test && make install && \
-    cd .. && rm -rf *.tar.gz *.md5 lua-${LUA_VERSION}
-
+        mc aptitude \
+        tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
+        libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
+        libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
+        dh-autoreconf && \
+    apt-get clean
 
 ## Asterisk
 
@@ -48,9 +26,8 @@ RUN curl -sf \
     cd /tmp/asterisk && \
     contrib/scripts/install_prereq install && \
     ./configure && \
-    make menuselect.makeopts
-
-RUN menuselect/menuselect \
+    make menuselect.makeopts && \
+    menuselect/menuselect \
     --disable CORE-SOUNDS-ES-G729 \
     --disable CORE-SOUNDS-ES-G722 \
     --disable CORE-SOUNDS-EN-ULAW \
@@ -451,29 +428,42 @@ RUN menuselect/menuselect \
     --disable test_skel \
     --disable test_security_events \
     --disable test_amihooks \
-    menuselect.makeopts
-
-RUN make && make install
+    menuselect.makeopts && \
+    make && make install && \
+    apt-get clean
 
 RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
 
 
+## Lua 
+
+ENV LUA_HASH 2e115fe26e435e33b0d5c022e4490567
+ENV LUA_MAJOR_VERSION 5.1
+ENV LUA_MINOR_VERSION 5
+ENV LUA_VERSION ${LUA_MAJOR_VERSION}.${LUA_MINOR_VERSION}
+
+RUN mkdir /tmp/lua && \
+    cd /tmp/lua && \
+    echo "${LUA_HASH}  lua-${LUA_VERSION}.tar.gz" > lua-${LUA_VERSION}.md5 && \
+    curl -R -O http://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz && \
+    md5sum -c lua-${LUA_VERSION}.md5 && \
+    tar -zxf lua-${LUA_VERSION}.tar.gz && \
+    cd /tmp/lua/lua-${LUA_VERSION} && \
+    make linux && make linux test && make install && \
+    cd .. && rm -rf *.tar.gz *.md5 lua-${LUA_VERSION}
+
+
 ## Install luarocks
 
-RUN mkdir /tmp/luarocks
-
-RUN curl -sf -o /tmp/luarocks.tar.gz -L http://luarocks.org/releases/luarocks-2.2.1.tar.gz
-
-RUN tar -zxf /tmp/luarocks.tar.gz -C /tmp/luarocks --strip-components=1
-
-WORKDIR /tmp/luarocks
-
-RUN ./configure;
-
-RUN make bootstrap
+RUN mkdir /tmp/luarocks && \
+    curl -sf -o /tmp/luarocks.tar.gz -L http://luarocks.org/releases/luarocks-2.2.1.tar.gz && \
+    tar -zxf /tmp/luarocks.tar.gz -C /tmp/luarocks --strip-components=1 && \
+    cd /tmp/luarocks && \
+    ./configure && \
+    make bootstrap
 
 
-## Install additional lua rocks:
+## Install rocks:
 
 RUN luarocks install luasocket && \
     luarocks install inspect && \
@@ -484,24 +474,13 @@ RUN luarocks install luasocket && \
 
 ## Install lua mongo driver
 
-WORKDIR /tmp
-
-RUN git clone https://github.com/mongodb/mongo-cxx-driver.git
-
-WORKDIR /tmp/mongo-cxx-driver
-
-RUN git checkout 26compat
-
-RUN scons --prefix=/usr --full --use-system-boost install-mongoclient
-
-WORKDIR /tmp
-
-RUN git clone https://github.com/moai/luamongo.git
-
-WORKDIR /tmp/luamongo
-
-RUN make Linux LUAPKG=lua5.1
-
-RUN cp mongo.so /usr/local/lib/lua/5.1/mongo.so
-
-WORKDIR /tmp
+RUN cd /tmp && \
+    git clone https://github.com/mongodb/mongo-cxx-driver.git && \
+    cd /tmp/mongo-cxx-driver && \
+    git checkout 26compat && \
+    scons --prefix=/usr --full --use-system-boost install-mongoclient && \
+    cd /tmp && \
+    git clone https://github.com/moai/luamongo.git && \
+    cd /tmp/luamongo && \
+    make Linux LUAPKG=lua5.1 && \
+    cp /tmp/luamongo/mongo.so /usr/local/lib/lua/5.1/mongo.so
