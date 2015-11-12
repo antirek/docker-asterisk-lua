@@ -40,19 +40,15 @@ RUN cd /usr/bin/lua/lua-${LUA_VERSION} && \
 
 ## Asterisk
 
-RUN curl -sf -o /tmp/asterisk.tar.gz -L http://downloads.asterisk.org/pub/telephony/certified-asterisk/certified-asterisk-11.6-current.tar.gz
-
-RUN mkdir /tmp/asterisk
-
-RUN tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1
-
-WORKDIR /tmp/asterisk
-
-RUN contrib/scripts/install_prereq install
-
-RUN ./configure
-
-RUN make menuselect.makeopts
+RUN curl -sf \
+        -o /tmp/asterisk.tar.gz \
+        -L http://downloads.asterisk.org/pub/telephony/certified-asterisk/certified-asterisk-11.6-current.tar.gz && \
+    mkdir /tmp/asterisk && \
+    tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1 && \
+    cd /tmp/asterisk && \
+    contrib/scripts/install_prereq install && \
+    ./configure && \
+    make menuselect.makeopts
 
 RUN menuselect/menuselect \
     --disable CORE-SOUNDS-ES-G729 \
@@ -483,7 +479,6 @@ RUN luarocks install luasocket && \
     luarocks install inspect && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
-    luarocks install luasql-mysql && \
     luarocks install sendmail
 
 
