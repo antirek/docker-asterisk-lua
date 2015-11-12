@@ -1,20 +1,30 @@
 FROM ubuntu:14.04
 
+## update ubuntu & install reqs
+
+RUN apt-get check && \
+    apt-get update && \
+    apt-get install -y \ 
+        build-essential \
+        zip unzip \
+        libreadline-dev \
+        curl libncurses-dev \
+        mc aptitude
+    
+RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
+    libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
+    libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
+    dh-autoreconf
+
+RUN apt-get clean
+
+
 ## Lua 
 
 ENV LUA_HASH 2e115fe26e435e33b0d5c022e4490567
 ENV LUA_MAJOR_VERSION 5.1
 ENV LUA_MINOR_VERSION 5
 ENV LUA_VERSION ${LUA_MAJOR_VERSION}.${LUA_MINOR_VERSION}
-
-RUN apt-get update && \
-    apt-get install -y build-essential 
-
-RUN apt-get install -y zip unzip libreadline-dev
-    
-RUN apt-get clean
-
-RUN apt-get install -y curl libncurses-dev
 
 RUN mkdir /usr/bin/lua && \
     cd /usr/bin/lua && \
@@ -38,13 +48,10 @@ RUN tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1
 
 WORKDIR /tmp/asterisk
 
-RUN apt-get install -y aptitude
-
 RUN contrib/scripts/install_prereq install
 
 RUN ./configure
 
-# Remove the native build option
 RUN make menuselect.makeopts
 
 RUN menuselect/menuselect \
@@ -450,9 +457,7 @@ RUN menuselect/menuselect \
     --disable test_amihooks \
     menuselect.makeopts
 
-RUN make
-
-RUN make install
+RUN make && make install
 
 RUN sed -e '/TTY=9/ s/^#*/#/' -i /usr/sbin/safe_asterisk
 
@@ -474,26 +479,15 @@ RUN make bootstrap
 
 ## Install additional lua rocks:
 
-RUN luarocks install luasocket
-
-RUN luarocks install inspect 
-
-RUN luarocks install redis-lua 
-
-RUN luarocks install luafilesystem
-
+RUN luarocks install luasocket && \
+    luarocks install inspect && \
+    luarocks install redis-lua && \
+    luarocks install luafilesystem && \
+    luarocks install luasql-mysql && \
+    luarocks install sendmail
 
 
 ## Install lua mongo driver
-
-RUN apt-get install -y git mc
-
-RUN apt-get check && apt-get update && apt-get clean
-
-RUN apt-get -y install tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
-    libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
-    libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-    dh-autoreconf
 
 WORKDIR /tmp
 
