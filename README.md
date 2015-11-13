@@ -18,6 +18,22 @@ Contain
 
 > docker pull antirek/astolua
 
+(attention: traffic ~ 600Mb download)
+
+
+
+## Run
+
+> docker run -i -t antirek/astolua
+
+see ./run for more options of run
+
+
+
+## Extend
+
+Use this image as base for your own images
+
 
 
 
