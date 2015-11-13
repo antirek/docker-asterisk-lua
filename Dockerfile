@@ -158,7 +158,7 @@ RUN curl -sf \
     --disable BUSYDETECT_COMPARE_TONE_AND_SILENCE \
     --disable INTEGER_CALLERID \
     --disable G711_REDUCED_BRANCHING \
-    --enable BUILD_NATIVE \
+    --disable BUILD_NATIVE \
     --disable TEST_CODING_TABLES \
     --disable BUSYDETECT_TONEONLY \
     --disable MALLOC_DEBUG \

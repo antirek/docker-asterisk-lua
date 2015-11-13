@@ -4,4 +4,4 @@ docker run \
  -v /tmp/var/log:/var/log \
  -v /var/lib/asterisk:/var/lib/asterisk \
  --net=host \
- -i -t ubuntu:lua
+ -i -t antirek/asterisk
