@@ -39,6 +39,6 @@ Use this image as base for your own images
 
 ## Thanks
 
-docker lua https://github.com/niaquinto/docker-lua
+docker-lua https://github.com/niaquinto/docker-lua
 
-docker asterisk https://github.com/dougbtv/docker-asterisk
+docker-asterisk https://github.com/dougbtv/docker-asterisk
