@@ -1,7 +1,4 @@
 docker run \
  -v /etc/asterisk:/etc/asterisk \
- -v /tmp/lua-dialplan:/tmp/lua-dialplan \
- -v /tmp/var/log:/var/log \
- -v /var/lib/asterisk:/var/lib/asterisk \
  --net=host \
- -i -t antirek/asterisk
+ -i -t antirek/astolua
