@@ -16,7 +16,7 @@ RUN apt-get check && \
 
 RUN curl -sf \
         -o /tmp/asterisk.tar.gz \
-        -L http://downloads.asterisk.org/pub/telephony/certified-asterisk/certified-asterisk-11.6-current.tar.gz && \
+        -L http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-11-current.tar.gz && \
     mkdir /tmp/asterisk && \
     tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1 && \
     cd /tmp/asterisk && \
