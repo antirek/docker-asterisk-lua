@@ -25,8 +25,11 @@ Contain
 ## Run
 
 > docker run \
+
 >   -v /etc/asterisk:/etc/asterisk \
+
 >   --net=host \
+
 >   -i -t antirek/astolua
 
 
