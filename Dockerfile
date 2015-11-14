@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:14.04.3
 
 ## update ubuntu & install reqs
 
@@ -459,7 +459,7 @@ RUN mkdir /tmp/luarocks && \
     make bootstrap
 
 
-## Install rocks:
+## Install rocks
 
 RUN luarocks install luasocket && \
     luarocks install inspect && \

@@ -24,9 +24,10 @@ Contain
 
 ## Run
 
-> docker run -i -t antirek/astolua
-
-see ./run for more options of run
+> docker run \
+>   -v /etc/asterisk:/etc/asterisk \
+>   --net=host \
+>   -i -t antirek/astolua
 
 
 
@@ -34,7 +35,16 @@ see ./run for more options of run
 
 Use this image as base for your own images
 
+Write Dockerfile like
 
+`````
+
+FROM antirek/astolua
+
+RUN luarocks install inspect
+
+
+`````
 
 
 ## Thanks
