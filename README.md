@@ -47,6 +47,9 @@ FROM antirek/astolua
 RUN luarocks install inspect
 
 
+... and other instructions
+
+
 `````
 
 
