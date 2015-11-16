@@ -28,6 +28,10 @@ Contain
 
 >   -v /etc/asterisk:/etc/asterisk \
 
+>   -v /var/lib/asterisk/sounds:/var/lib/asterisk/sounds \
+
+>   -v /var/log/asterisk:/var/log/asterisk \
+
 >   --net=host \
 
 >   -i -t antirek/astolua
