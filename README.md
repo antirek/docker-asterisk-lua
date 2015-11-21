@@ -24,21 +24,12 @@ Contain
 
 ## Run
 
-> docker run \
-
->   -v /etc/asterisk:/etc/asterisk \
-
->   -v /var/lib/asterisk/sounds:/var/lib/asterisk/sounds \
-
->   -v /var/log/asterisk:/var/log/asterisk \
-
->   --net=host \
-
->   -i -t antirek/astolua
-
+See ./run
 
 
 ## Extend
+
+(Usage sample)[http://github.com/antirek/docker-astolua-sample]
 
 Use this image as base for your own images
 
@@ -53,8 +44,9 @@ RUN luarocks install inspect
 
 ... and other instructions
 
-
 `````
+
+
 
 
 ## Thanks

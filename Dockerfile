@@ -390,8 +390,8 @@ RUN curl -sf \
     --enable res_calendar_ews \
     --enable res_phoneprov \
     --disable IMAP_STORAGE \
-    --disable FILE_STORAGE \
-    --enable ODBC_STORAGE \
+    --enable FILE_STORAGE \
+    --disable ODBC_STORAGE \
     --disable test_time \
     --disable test_strings \
     --disable test_ast_format_str_reduce \
