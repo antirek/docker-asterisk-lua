@@ -470,13 +470,16 @@ RUN luarocks install luasocket && \
 
 ## Install lua mongo driver
 
-RUN cd /tmp && \
-    git clone https://github.com/mongodb/mongo-cxx-driver.git && \
+RUN mkdir /tmp/mongo-cxx-driver && \
+    curl -sf -o /tmp/mongo-cxx-driver.tar.gz -L https://github.com/mongodb/mongo-cxx-driver/archive/legacy-0.0-26compat-2.6.11.tar.gz && \
+    tar -zxf /tmp/mongo-cxx-driver.tar.gz -C /tmp/mongo-cxx-driver --strip-components=1 && \
     cd /tmp/mongo-cxx-driver && \
-    git checkout 26compat && \
-    scons --prefix=/usr --full --use-system-boost install-mongoclient && \
-    cd /tmp && \
-    git clone https://github.com/moai/luamongo.git && \
+    scons --prefix=/usr --full --use-system-boost install-mongoclient
+
+
+RUN mkdir /tmp/luamongo && \
+    curl -sf -o /tmp/luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.5.tar.gz && \
+    tar -zxf /tmp/luamongo.tar.gz -C /tmp/luamongo --strip-components=1 && \
     cd /tmp/luamongo && \
     make Linux LUAPKG=lua5.1 && \
     cp /tmp/luamongo/mongo.so /usr/local/lib/lua/5.1/mongo.so
