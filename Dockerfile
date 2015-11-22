@@ -1,4 +1,18 @@
+# Asterisk with Lua support
+# 
+# VERSION 0.0.1
+#
+# Contain
+#  - Asterisk 11.20
+#  - Lua 5.1
+#  - LuaRocks
+#  - mongodb driver & luamongo
+#
+
 FROM ubuntu:14.04.3
+
+MAINTAINER Sergey Dmitriev <serge.dmitriev@gmail.com>
+
 
 ## update ubuntu & install reqs
 
@@ -11,6 +25,7 @@ RUN apt-get check && \
         libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
         dh-autoreconf && \
     apt-get clean
+
 
 ## Asterisk
 
@@ -449,6 +464,23 @@ RUN mkdir /tmp/lua && \
     cd .. && rm -rf *.tar.gz *.md5 lua-${LUA_VERSION}
 
 
+## Install lua mongo driver
+
+RUN mkdir /tmp/mongo-cxx-driver && \
+    curl -sf -o /tmp/mongo-cxx-driver.tar.gz -L https://github.com/mongodb/mongo-cxx-driver/archive/legacy-0.0-26compat-2.6.11.tar.gz && \
+    tar -zxf /tmp/mongo-cxx-driver.tar.gz -C /tmp/mongo-cxx-driver --strip-components=1 && \
+    cd /tmp/mongo-cxx-driver && \
+    scons --prefix=/usr --full --use-system-boost install-mongoclient
+
+
+RUN mkdir /tmp/luamongo && \
+    curl -sf -o /tmp/luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.5.tar.gz && \
+    tar -zxf /tmp/luamongo.tar.gz -C /tmp/luamongo --strip-components=1 && \
+    cd /tmp/luamongo && \
+    make Linux LUAPKG=lua5.1 && \
+    cp /tmp/luamongo/mongo.so /usr/local/lib/lua/5.1/mongo.so
+
+
 ## Install luarocks
 
 RUN mkdir /tmp/luarocks && \
@@ -466,20 +498,3 @@ RUN luarocks install luasocket && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
     luarocks install sendmail
-
-
-## Install lua mongo driver
-
-RUN mkdir /tmp/mongo-cxx-driver && \
-    curl -sf -o /tmp/mongo-cxx-driver.tar.gz -L https://github.com/mongodb/mongo-cxx-driver/archive/legacy-0.0-26compat-2.6.11.tar.gz && \
-    tar -zxf /tmp/mongo-cxx-driver.tar.gz -C /tmp/mongo-cxx-driver --strip-components=1 && \
-    cd /tmp/mongo-cxx-driver && \
-    scons --prefix=/usr --full --use-system-boost install-mongoclient
-
-
-RUN mkdir /tmp/luamongo && \
-    curl -sf -o /tmp/luamongo.tar.gz -L https://github.com/moai/luamongo/archive/v0.4.5.tar.gz && \
-    tar -zxf /tmp/luamongo.tar.gz -C /tmp/luamongo --strip-components=1 && \
-    cd /tmp/luamongo && \
-    make Linux LUAPKG=lua5.1 && \
-    cp /tmp/luamongo/mongo.so /usr/local/lib/lua/5.1/mongo.so
