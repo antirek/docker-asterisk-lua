@@ -45,10 +45,10 @@ RUN curl -sf \
     --disable CORE-SOUNDS-RU-G729 \
     --disable CORE-SOUNDS-FR-ULAW \
     --disable CORE-SOUNDS-RU-G722 \
-    --enable CORE-SOUNDS-RU-WAV \
+    --disable CORE-SOUNDS-RU-WAV \
     --disable CORE-SOUNDS-ES-SIREN7 \
     --disable CORE-SOUNDS-EN_AU-ULAW \
-    --enable CORE-SOUNDS-EN-WAV \
+    --disable CORE-SOUNDS-EN-WAV \
     --disable CORE-SOUNDS-ES-WAV \
     --disable CORE-SOUNDS-RU-SLN16 \
     --disable CORE-SOUNDS-EN_AU-ALAW \
@@ -126,14 +126,14 @@ RUN curl -sf \
     --disable EXTRA-SOUNDS-FR-SIREN14 \
     --disable EXTRA-SOUNDS-FR-SLN16 \
     --disable EXTRA-SOUNDS-FR-G729 \
-    --enable EXTRA-SOUNDS-EN-WAV \
+    --disable EXTRA-SOUNDS-EN-WAV \
     --disable EXTRA-SOUNDS-FR-ALAW \
     --disable EXTRA-SOUNDS-FR-SIREN7 \
     --disable MOH-OPSOUND-G722 \
     --disable MOH-OPSOUND-ALAW \
     --disable MOH-OPSOUND-SLN16 \
     --disable MOH-OPSOUND-ULAW \
-    --enable MOH-OPSOUND-WAV \
+    --disable MOH-OPSOUND-WAV \
     --disable MOH-OPSOUND-SIREN14 \
     --enable MOH-OPSOUND-GSM \
     --disable MOH-OPSOUND-G729 \
