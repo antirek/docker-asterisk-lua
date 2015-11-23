@@ -30,10 +30,10 @@ RUN curl -sf \
     --disable CORE-SOUNDS-RU-G729 \
     --disable CORE-SOUNDS-FR-ULAW \
     --disable CORE-SOUNDS-RU-G722 \
-    --disable CORE-SOUNDS-RU-WAV \
+    --enable CORE-SOUNDS-RU-WAV \
     --disable CORE-SOUNDS-ES-SIREN7 \
     --disable CORE-SOUNDS-EN_AU-ULAW \
-    --disable CORE-SOUNDS-EN-WAV \
+    --enable CORE-SOUNDS-EN-WAV \
     --disable CORE-SOUNDS-ES-WAV \
     --disable CORE-SOUNDS-RU-SLN16 \
     --disable CORE-SOUNDS-EN_AU-ALAW \
@@ -43,7 +43,7 @@ RUN curl -sf \
     --disable CORE-SOUNDS-EN_AU-SIREN14 \
     --disable CORE-SOUNDS-RU-ALAW \
     --disable CORE-SOUNDS-EN_AU-SIREN7 \
-    --disable CORE-SOUNDS-EN-GSM \
+    --enable CORE-SOUNDS-EN-GSM \
     --disable CORE-SOUNDS-FR-GSM \
     --disable CORE-SOUNDS-EN-SIREN7 \
     --disable CORE-SOUNDS-ES-GSM \
@@ -67,7 +67,7 @@ RUN curl -sf \
     --disable CORE-SOUNDS-RU-ULAW \
     --disable CORE-SOUNDS-FR-SIREN7 \
     --disable CORE-SOUNDS-ES-SLN16 \
-    --disable CORE-SOUNDS-RU-GSM \
+    --enable CORE-SOUNDS-RU-GSM \
     --disable CORE-SOUNDS-EN-ALAW \
     --disable chan_h323 \
     --disable chan_alsa \
@@ -101,7 +101,7 @@ RUN curl -sf \
     --disable EXTRA-SOUNDS-FR-GSM \
     --disable EXTRA-SOUNDS-EN-G722 \
     --disable EXTRA-SOUNDS-EN-ALAW \
-    --disable EXTRA-SOUNDS-EN-GSM \
+    --enable EXTRA-SOUNDS-EN-GSM \
     --disable EXTRA-SOUNDS-EN-SLN16 \
     --disable EXTRA-SOUNDS-EN-SIREN7 \
     --disable EXTRA-SOUNDS-FR-G722 \
@@ -111,16 +111,16 @@ RUN curl -sf \
     --disable EXTRA-SOUNDS-FR-SIREN14 \
     --disable EXTRA-SOUNDS-FR-SLN16 \
     --disable EXTRA-SOUNDS-FR-G729 \
-    --disable EXTRA-SOUNDS-EN-WAV \
+    --enable EXTRA-SOUNDS-EN-WAV \
     --disable EXTRA-SOUNDS-FR-ALAW \
     --disable EXTRA-SOUNDS-FR-SIREN7 \
     --disable MOH-OPSOUND-G722 \
     --disable MOH-OPSOUND-ALAW \
     --disable MOH-OPSOUND-SLN16 \
     --disable MOH-OPSOUND-ULAW \
-    --disable MOH-OPSOUND-WAV \
+    --enable MOH-OPSOUND-WAV \
     --disable MOH-OPSOUND-SIREN14 \
-    --disable MOH-OPSOUND-GSM \
+    --enable MOH-OPSOUND-GSM \
     --disable MOH-OPSOUND-G729 \
     --disable MOH-OPSOUND-SIREN7 \
     --disable conf2ael \
