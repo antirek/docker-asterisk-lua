@@ -38,7 +38,7 @@ RUN make dep 1> /dev/null
 RUN make 1> /dev/null
 RUN make install
 RUN ldconfig
-RUN ldconfig -p | grep pj
+## RUN ldconfig -p | grep pj
 
 ## Asterisk
 

@@ -1,0 +1,6 @@
+docker run \
+ -v /var/lib/asterisk/sounds:/var/lib/asterisk/sounds \
+ -v /var/log/asterisk:/var/log/asterisk \
+ -v /etc/asterisk:/etc/asterisk \
+ --net=host \
+ -i -t antirek/astolua:blackbox
