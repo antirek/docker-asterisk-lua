@@ -28,17 +28,17 @@ RUN apt-get check && \
 
 ## PJSIP
 
-RUN apt-get install -y bzip2
-RUN mkdir /tmp/pjproject
-RUN curl -sf -o /tmp/pjproject.tar.bz2 -L http://www.pjsip.org/release/2.4.5/pjproject-2.4.5.tar.bz2
-RUN tar -xjvf /tmp/pjproject.tar.bz2 -C /tmp/pjproject --strip-components=1
-WORKDIR /tmp/pjproject
-RUN ./configure --prefix=/usr --libdir=/usr/lib64 --enable-shared --disable-sound --disable-resample --disable-video --disable-opencore-amr 1> /dev/null
-RUN make dep 1> /dev/null
-RUN make 1> /dev/null
-RUN make install
-RUN ldconfig
-## RUN ldconfig -p | grep pj
+RUN apt-get install -y bzip2 \
+    mkdir /tmp/pjproject \
+    curl -sf -o /tmp/pjproject.tar.bz2 -L http://www.pjsip.org/release/2.4.5/pjproject-2.4.5.tar.bz2 \
+    tar -xjvf /tmp/pjproject.tar.bz2 -C /tmp/pjproject --strip-components=1 \
+    cd /tmp/pjproject \
+    ./configure --prefix=/usr --libdir=/usr/lib64 --enable-shared --disable-sound --disable-resample --disable-video --disable-opencore-amr 1> /dev/null \
+    make dep 1> /dev/null \
+    make 1> /dev/null \
+    make install \
+    ldconfig \
+
 
 ## Asterisk
 
