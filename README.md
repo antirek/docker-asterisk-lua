@@ -2,9 +2,15 @@
 
 Docker container with asterisk and lua environment
 
+
+redbox - asterisk 1.8
+bluebox - asterisk 11
+blackbox - asterisk 13
+
+
 Contain
 
-- Asterisk 11.20 [http://www.asterisk.org/]
+- Asterisk [http://www.asterisk.org/]
 
 - Lua 5.1 [http://www.lua.org/]
 

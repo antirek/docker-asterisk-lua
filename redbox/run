@@ -3,4 +3,4 @@ docker run \
  -v /var/lib/asterisk/sounds:/var/lib/asterisk/sounds \
  -v /var/log/asterisk:/var/log/asterisk \
  --net=host \
- -i -t antirek/astolua
+ -i -t antirek/astolua:redbox
