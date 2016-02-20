@@ -23,7 +23,7 @@ RUN apt-get check && \
         tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
         libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
         libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-        dh-autoreconf lame sox libzmq-dev libzmqpp-dev && \
+        dh-autoreconf lame sox libzmq3-dev libzmqpp-dev && \
     apt-get clean
 
 
