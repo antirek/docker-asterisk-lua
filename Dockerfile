@@ -23,7 +23,7 @@ RUN apt-get check && \
         tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
         libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
         libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-        dh-autoreconf lame sox && \
+        dh-autoreconf lame sox libzmq-dev apt-get install libzmqpp-dev && \
     apt-get clean
 
 
@@ -497,4 +497,6 @@ RUN luarocks install luasocket && \
     luarocks install inspect && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
-    luarocks install sendmail
+    luarocks install sendmail && \
+    luarocks install lzmq
+
