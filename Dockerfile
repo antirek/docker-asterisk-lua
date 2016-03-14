@@ -498,4 +498,5 @@ RUN luarocks install luasocket && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
     luarocks install sendmail && \
-    luarocks install lzmq
+    luarocks install lzmq && \
+    luarocks install luasec
