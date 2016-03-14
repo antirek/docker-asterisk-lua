@@ -9,7 +9,7 @@
 #  - mongodb driver & luamongo
 #
 
-FROM ubuntu:14.04.3
+FROM ubuntu:14.04.4
 
 MAINTAINER Sergey Dmitriev <serge.dmitriev@gmail.com>
 
