@@ -499,4 +499,5 @@ RUN luarocks install luasocket && \
     luarocks install luafilesystem && \
     luarocks install sendmail && \
     luarocks install lzmq && \
-    luarocks install luasec
+    luarocks install luasec && \
+    luarocks install json-lua
