@@ -1,13 +1,13 @@
 # Asterisk with Lua support
 # 
-# VERSION 0.0.1
+# VERSION 0.0.2
 #
 # Contain
-#  - Asterisk 11.20
+#  - Asterisk 11
 #  - Lua 5.1
 #  - LuaRocks
 #  - mongodb driver & luamongo
-#
+#  - g729
 
 FROM ubuntu:14.04.4
 
@@ -503,6 +503,7 @@ RUN luarocks install luasocket && \
     luarocks install json-lua
 
 
+## g729
 
 RUN mkdir /usr/codecs && \
     cd /usr/codecs && \

@@ -1,13 +1,13 @@
 # Asterisk with Lua support
 # 
-# VERSION 0.0.1
+# VERSION 0.0.2
 #
 # Contain
 #  - Asterisk 1.8
 #  - Lua 5.1
 #  - LuaRocks
 #  - mongodb driver & luamongo
-#
+#  - g729
 
 FROM ubuntu:14.04.4
 
@@ -22,8 +22,8 @@ RUN apt-get check && \
         build-essential zip unzip libreadline-dev curl libncurses-dev mc aptitude \
         tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
         libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
-        libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-        dh-autoreconf lame sox && \
+        libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \        
+        dh-autoreconf lame sox libzmq3-dev libzmqpp-dev libtiff-tools && \
     apt-get clean
 
 
@@ -497,4 +497,47 @@ RUN luarocks install luasocket && \
     luarocks install inspect && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
-    luarocks install sendmail
+    luarocks install sendmail && \
+    luarocks install lzmq && \
+    luarocks install luasec && \
+    luarocks install json-lua
+
+
+## g729
+
+RUN mkdir /usr/codecs && \
+    cd /usr/codecs && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-athlon-sse.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-atom.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-barcelona.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-core2-sse4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-core2.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-debug.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-geode.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-opteron-sse3.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-opteron.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium-m.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium2.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium3-no-sse.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium3.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium4-no-sse.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium4-sse3.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-pentium4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-x86_64-barcelona.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-x86_64-core2-sse4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-x86_64-core2.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-x86_64-opteron-sse3.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-x86_64-opteron.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-gcc4-glibc-x86_64-pentium4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-core2-sse4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-core2.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-debug.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-pentium.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-pentium2.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-pentium3.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-pentium4-sse3.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-pentium4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-x86_64-core2-sse4.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-x86_64-core2.so && \
+    curl -O http://asterisk.hosting.lv/bin/codec_g729-ast18-icc-glibc-x86_64-pentium4.so

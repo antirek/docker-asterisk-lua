@@ -3,28 +3,35 @@
 Docker container with asterisk and lua environment
 
 
-redbox - asterisk 1.8
-bluebox - asterisk 11
-blackbox - asterisk 13
+### redbox - asterisk 1.8
 
+> docker pull antirek/astolua:redbox
 
-Contain
+### bluebox - asterisk 11
 
-- Asterisk [http://www.asterisk.org/]
+> docker pull antirek/astolua:bluebox
 
-- Lua 5.1 [http://www.lua.org/]
+> docker pull antirek/astolua:latest
 
-- luarocks [https://luarocks.org/]
+### blackbox - asterisk 13
 
-- mongodb driver for lua [https://github.com/moai/luamongo]
-
-
-
-## Pull
-
-> docker pull antirek/astolua
+> docker pull antirek/astolua:blackbox
 
 (attention: traffic ~ 600Mb download)
+
+
+
+## Contain
+
+- [Asterisk](http://www.asterisk.org/)
+
+- [Lua 5.1](http://www.lua.org/)
+
+- [luarocks](https://luarocks.org/)
+
+- [mongodb driver for lua](https://github.com/moai/luamongo)
+
+- [g729](http://asterisk.hosting.lv/)
 
 
 
@@ -57,6 +64,7 @@ RUN luarocks install inspect
 
 ## Thanks
 
-docker-lua https://github.com/niaquinto/docker-lua
+[docker-lua](https://github.com/niaquinto/docker-lua)
 
-docker-asterisk https://github.com/dougbtv/docker-asterisk
+[docker-asterisk](https://github.com/dougbtv/docker-asterisk)
+
