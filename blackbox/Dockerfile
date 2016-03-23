@@ -514,7 +514,8 @@ RUN luarocks install luasocket && \
     luarocks install sendmail && \
     luarocks install lzmq && \
     luarocks install luasec && \
-    luarocks install json-lua
+    luarocks install json-lua && \
+    luarocks install busted
 
 
 ## g729
