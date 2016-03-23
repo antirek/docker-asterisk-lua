@@ -501,7 +501,8 @@ RUN luarocks install luasocket && \
     luarocks install lzmq && \
     luarocks install luasec && \
     luarocks install json-lua && \
-    luarocks install busted
+    luarocks install busted && \
+    luarocks install luacov
 
 
 ## g729
