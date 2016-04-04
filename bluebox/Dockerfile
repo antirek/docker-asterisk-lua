@@ -502,7 +502,8 @@ RUN luarocks install luasocket && \
     luarocks install luasec && \
     luarocks install json-lua && \
     luarocks install busted && \
-    luarocks install luacov
+    luarocks install luacov && \
+    luarocks install uuid
 
 
 RUN mkdir /usr/codecs && \
