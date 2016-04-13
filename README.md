@@ -3,22 +3,22 @@
 Docker container with asterisk and lua environment
 
 
-### redbox - asterisk 1.8
+### asterisk 1.8
 
-> docker pull antirek/astolua:redbox
+> docker pull antirek/astolua:asterisk1.8
 
-### bluebox - asterisk 11
+### asterisk 11
 
-> docker pull antirek/astolua:bluebox
+> docker pull antirek/astolua:asterisk11
 
 > docker pull antirek/astolua:latest
 
-### blackbox - asterisk 13
+### asterisk 13
 
-> docker pull antirek/astolua:blackbox
+> docker pull antirek/astolua:asterisk13
+
 
 (attention: traffic ~ 600Mb download)
-
 
 
 ## Contain
