@@ -509,7 +509,6 @@ RUN luarocks install luasocket && \
     luarocks install moses && \
     luarocks install luacrypto && \
     luarocks install luasql-sqlite3 && \
-    luarocks install luasql-postgres && \
     luarocks install luasql-mysql && \
     luarocks install luasql-sqlite && \
     luarocks install luasql-odbc
