@@ -516,6 +516,7 @@ RUN cd /tmp && \
     git clone https://github.com/keplerproject/luasql.git && \
     cd luasql && \
     sed -i -e 's/LUA_SYS_VER ?= 5.2/LUA_SYS_VER ?= 5.1/g' config && \
+    sed -i -e 's_PREFIX ?= /usr_PREFIX ?= /usr/local_g' config && \
     make odbc && \
     make mysql && \
     make postgres && \

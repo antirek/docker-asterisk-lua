@@ -1,0 +1,5 @@
+docker run --name=test -it \
+    -v '/tmp:/2' \
+    --net='host' \
+    --rm \
+    antirek/astolua:bluebox bash
