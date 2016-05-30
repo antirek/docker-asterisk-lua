@@ -23,7 +23,9 @@ RUN apt-get check && \
         tcsh scons libpcre++-dev libboost-dev libboost-all-dev libreadline-dev \
         libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev \
         libboost-date-time-dev gcc g++ git lua5.1-dev make libmongo-client-dev \
-        dh-autoreconf lame sox libzmq3-dev libzmqpp-dev libtiff-tools && \
+        dh-autoreconf lame sox libzmq3-dev libzmqpp-dev libtiff-tools \
+        libmyodbc odbc-postgresql \
+        && \
     apt-get clean
 
 
@@ -503,8 +505,27 @@ RUN luarocks install luasocket && \
     luarocks install json-lua && \
     luarocks install busted && \
     luarocks install luacov && \
-    luarocks install uuid
+    luarocks install uuid && \
+    luarocks install moses && \
+    luarocks install luacrypto
 
+
+## add luasql libs
+
+RUN cd /tmp && \
+    git clone https://github.com/keplerproject/luasql.git && \
+    cd luasql && \
+    sed -i -e 's/LUA_SYS_VER ?= 5.2/LUA_SYS_VER ?= 5.1/g' config && \
+    sed -i -e 's_PREFIX ?= /usr_PREFIX ?= /usr/local_g' config && \
+    make odbc && \
+    make mysql && \
+    make postgres && \
+    make sqlite && \
+    make sqlite3 && \
+    make install
+    
+
+## g729    
 
 RUN mkdir /usr/codecs && \
     cd /usr/codecs && \
