@@ -503,7 +503,11 @@ RUN luarocks install luasocket && \
     luarocks install json-lua && \
     luarocks install busted && \
     luarocks install luacov && \
-    luarocks install uuid
+    luarocks install uuid && \
+    luarocks install moses && \
+    luarocks install luacrypto && \
+    luarocks install http && \
+    luarocks install httpclient
     
 
 ## g729

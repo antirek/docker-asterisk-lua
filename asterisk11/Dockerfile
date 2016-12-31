@@ -507,7 +507,9 @@ RUN luarocks install luasocket && \
     luarocks install luacov && \
     luarocks install uuid && \
     luarocks install moses && \
-    luarocks install luacrypto
+    luarocks install luacrypto && \
+    luarocks install http && \
+    luarocks install httpclient
 
 
 ## add luasql libs
