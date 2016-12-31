@@ -2,6 +2,7 @@
 
 Docker container with asterisk and lua environment
 
+[![](https://images.microbadger.com/badges/image/antirek/asterisk-lua.svg)](https://microbadger.com/images/antirek/asterisk-lua "Get your own image badge on microbadger.com")
 
 ### asterisk 1.8
 
