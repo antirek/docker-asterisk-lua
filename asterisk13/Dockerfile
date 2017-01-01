@@ -515,6 +515,7 @@ RUN luarocks install luasocket && \
     luarocks install lzmq && \
     luarocks install luasec && \
     luarocks install json-lua && \
+    luarocks install lua-cjson && \
     luarocks install busted && \
     luarocks install luacov && \
     luarocks install uuid  && \

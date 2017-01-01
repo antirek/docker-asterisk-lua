@@ -31,7 +31,7 @@ RUN apt-get check && \
 
 RUN curl -sf \
         -o /tmp/asterisk.tar.gz \
-        -L http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-1.8-current.tar.gz && \
+        -L http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-1.8.32.3.tar.gz && \
     mkdir /tmp/asterisk && \
     tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1 && \
     cd /tmp/asterisk && \
@@ -501,6 +501,7 @@ RUN luarocks install luasocket && \
     luarocks install lzmq && \
     luarocks install luasec && \
     luarocks install json-lua && \
+    luarocks install lua-cjson && \
     luarocks install busted && \
     luarocks install luacov && \
     luarocks install uuid && \
