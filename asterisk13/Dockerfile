@@ -522,7 +522,8 @@ RUN luarocks install luasocket && \
     luarocks install moses && \
     luarocks install luacrypto && \
     luarocks install http && \
-    luarocks install httpclient
+    luarocks install httpclient && \
+    luarocks install lualogging 
 
 
 ## g729
