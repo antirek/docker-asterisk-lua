@@ -1,4 +1,4 @@
-# docker-astolua
+# docker-asterisk-lua
 
 Docker container with asterisk and lua environment
 
@@ -6,17 +6,17 @@ Docker container with asterisk and lua environment
 
 ### asterisk 1.8
 
-> docker pull antirek/astolua:asterisk1.8
+> docker pull antirek/asterisk-lua:asterisk1.8
 
 ### asterisk 11
 
-> docker pull antirek/astolua:asterisk11
+> docker pull antirek/asterisk-lua:asterisk11
 
-> docker pull antirek/astolua:latest
+> docker pull antirek/asterisk-lua:latest
 
 ### asterisk 13
 
-> docker pull antirek/astolua:asterisk13
+> docker pull antirek/asterisk-lua:asterisk13
 
 
 (attention: traffic ~ 600Mb download)
@@ -43,15 +43,13 @@ See ./run
 
 ## Extend
 
-(Usage sample)[http://github.com/antirek/docker-astolua-sample]
-
 Use this image as base for your own images
 
 Write Dockerfile like
 
 `````
 
-FROM antirek/astolua
+FROM antirek/asterisk-lua
 
 RUN luarocks install inspect
 
