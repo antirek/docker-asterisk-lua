@@ -84,7 +84,7 @@ RUN curl -sf \
     --disable CORE-SOUNDS-RU-ULAW \
     --disable CORE-SOUNDS-FR-SIREN7 \
     --disable CORE-SOUNDS-ES-SLN16 \
-    --enable CORE-SOUNDS-RU-GSM \
+    --disable CORE-SOUNDS-RU-GSM \
     --disable CORE-SOUNDS-EN-ALAW \
     --disable chan_h323 \
     --disable chan_alsa \
@@ -118,7 +118,7 @@ RUN curl -sf \
     --disable EXTRA-SOUNDS-FR-GSM \
     --disable EXTRA-SOUNDS-EN-G722 \
     --disable EXTRA-SOUNDS-EN-ALAW \
-    --enable EXTRA-SOUNDS-EN-GSM \
+    --disable EXTRA-SOUNDS-EN-GSM \
     --disable EXTRA-SOUNDS-EN-SLN16 \
     --disable EXTRA-SOUNDS-EN-SIREN7 \
     --disable EXTRA-SOUNDS-FR-G722 \
@@ -137,7 +137,7 @@ RUN curl -sf \
     --disable MOH-OPSOUND-ULAW \
     --disable MOH-OPSOUND-WAV \
     --disable MOH-OPSOUND-SIREN14 \
-    --enable MOH-OPSOUND-GSM \
+    --disable MOH-OPSOUND-GSM \
     --disable MOH-OPSOUND-G729 \
     --disable MOH-OPSOUND-SIREN7 \
     --disable conf2ael \
@@ -495,22 +495,24 @@ RUN mkdir /tmp/luarocks && \
 
 ## Install rocks
 
-RUN luarocks install luasocket && \
-    luarocks install inspect && \
+RUN luarocks install inspect && \
+    luarocks install luasec && \
+    luarocks install luasocket && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
     luarocks install sendmail && \
     luarocks install lzmq && \
-    luarocks install luasec && \
     luarocks install json-lua && \
-    luarocks install lua-cjson && \
-    luarocks install busted && \
-    luarocks install luacov && \
+    luarocks install lua-cjson
+
+
+##    luarocks install busted && \
+RUN luarocks install luacov && \
     luarocks install uuid && \
-    luarocks install moses && \
+##    luarocks install moses && \
     luarocks install luacrypto && \
-    luarocks install http && \
-    luarocks install httpclient && \
+##    luarocks install http && \
+##    luarocks install httpclient && \
     luarocks install lualogging 
 
 

@@ -1,1 +1,1 @@
-docker build -t antirek/astolua:bluebox .
+docker build -t antirek/asterisk-lua .
