@@ -506,13 +506,13 @@ RUN luarocks install inspect && \
     luarocks install lua-cjson
 
 
-##    luarocks install busted && \
-RUN luarocks install luacov && \
+RUN luarocks install busted && \
+    luarocks install luacov && \
     luarocks install uuid && \
-##    luarocks install moses && \
+    luarocks install moses && \
     luarocks install luacrypto && \
-##    luarocks install http && \
-##    luarocks install httpclient && \
+    luarocks install http && \
+    luarocks install httpclient && \
     luarocks install lualogging 
 
 
