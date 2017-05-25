@@ -492,6 +492,13 @@ RUN mkdir /tmp/luarocks && \
     ./configure && \
     make bootstrap
 
+## Install luasec
+
+RUN git clone https://github.com/antirek/luasec.git /tmp/luasec && \
+    cd /tmp/luasec && \
+    make linux && \
+    make install
+
 
 ## Install rocks
 
@@ -500,8 +507,7 @@ RUN luarocks install luasocket && \
     luarocks install redis-lua && \
     luarocks install luafilesystem && \
     luarocks install sendmail && \
-    luarocks install lzmq && \
-    luarocks install luasec && \
+    luarocks install lzmq && \    
     luarocks install json-lua && \
     luarocks install lua-cjson && \
     luarocks install busted && \
