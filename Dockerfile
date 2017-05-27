@@ -33,7 +33,7 @@ RUN apt-get check && \
 
 RUN curl -sf \
         -o /tmp/asterisk.tar.gz \
-        -L http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-11.18.0.tar.gz && \
+        -L http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-11.25.1.tar.gz && \
     mkdir /tmp/asterisk && \
     tar -xzf /tmp/asterisk.tar.gz -C /tmp/asterisk --strip-components=1 && \
     cd /tmp/asterisk && \
@@ -496,8 +496,7 @@ RUN mkdir /tmp/luarocks && \
 
 RUN git clone https://github.com/antirek/luasec.git /tmp/luasec && \
     cd /tmp/luasec && \
-    make linux && \
-    make install
+    luarocks install luasec-0.6-1.rockspec
 
 
 ## Install rocks
@@ -515,7 +514,6 @@ RUN luarocks install luasocket && \
     luarocks install uuid && \
     luarocks install moses && \
     luarocks install luacrypto && \
-    luarocks install http && \
     luarocks install httpclient && \
     luarocks install lualogging 
 
