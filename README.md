@@ -1,5 +1,17 @@
 # docker-asterisk-lua
 
+Closed
+
+see
+
+[asterisk11-lua](https://github.com/antirek/docker-asterisk11-lua)
+
+[asterisk13-lua](https://github.com/antirek/docker-asterisk13-lua)
+
+[asterisk15-lua](https://github.com/antirek/docker-asterisk15-lua)
+
+
+
 Docker container with asterisk and lua environment
 
 [![](https://images.microbadger.com/badges/image/antirek/asterisk-lua.svg)](https://microbadger.com/images/antirek/asterisk-lua "Get your own image badge on microbadger.com")
